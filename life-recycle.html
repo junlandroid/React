@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React生命周期</title>
+    <script type="text/javascript" src="react.js"></script>
+    <script type="text/javascript" src="react-dom.js"></script>
+    <script type="text/javascript" src="browser.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    var HelloMessage = React.createClass(
+        {
+            //1,创建阶段
+            getDefaultProps: function () {
+                //创建类的时候被调用， this.props该组件的默认属性
+                console.log("getDefaultProps被调用");
+                return {};
+            },
+            //2实例化阶段
+            getInitialState:function () {
+                //初始化组件的state值，其返回值会赋值给组件的this.state属性
+                //获得this.state的默认值
+                console.log("getInitialState")
+                return {};
+            },
+            componentWillMount:function () {
+                //将要被挂载
+                //在render之前调用此方法
+                //对业务逻辑的处理都放在此方法中，如对state的操作
+                console.log("componentWillMount");
+            },
+
+            render:function () {
+                //根据state的值，render(渲染)并返回一个虚拟的DOM结构
+                console.log("render");
+                /*return <h1 style={{color:'#ff0000',fontSize:'24px'}}>Hello{this.props.name} 我是Junl<h1/>;*/
+            },
+            componentDidMount:function () {
+                //已挂载
+                //该方法在render之后，
+                //在该方法中，ReactJS会根据render返回的虚拟DOM结构来创建真实的DOM结构
+                //组件内部可以通过this.getDOMNode()方法来获取当前组建的节点,来操作DOM元素
+                console.log("componentDidMount")
+            },
+            //3、更新阶段，主要发生在用户操作之后或父组件有更新的时候，此时会根据用户的操作行为进行相应的页面结构的调整。
+            componentWillReceiveProps:function () {
+                //该方法发生在this.props被修改或父组件调用setProps()方法之后
+                //调用this.setState方法来对state的修改
+                console.log("componentWillReceiveProps");
+            },
+            shouldComponentUpdate:function () {
+                //用来拦截新的props或state，根据逻辑来判断是否需要更新
+                console.log("shouldComponentUpdate");
+                return true;
+            },
+            componentWillUpdate:function () {
+                //回调
+                //shouldComponentUpdate返回true的时候执行
+                //可以做一些更新前的操作
+                console.log("componentWillUpdate");
+            },
+            componentDidUpdate:function () {
+                //组件完成更新，通常在这里进行DOM操作
+                console.log("componentDidUpdate");
+            },
+            //4、销毁阶段
+            componentWillUnmount:function () {
+                //销毁时被调用，通常做一些取消事件绑定，移除虚拟DOM中对应的组件数据结构，销毁一些无效的定时器等工作
+                console.log("componentWillUnmount");
+            }
+        }
+    );
+    ReactDOM.render(<HelloMessage/>, document.getElementById('example'));
+
+</script>
+</body>
+</html>

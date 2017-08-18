@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React语法之this.props指向自己的属性</title>
+    <script type="text/javascript" src="react.js"></script>
+    <script type="text/javascript" src="react-dom.js"></script>
+    <script type="text/javascript" src="browser.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    var HelloMessage = React.createClass(
+        {
+            render: function () {
+                //通过this.props 指向自己的属性
+                //返回元素标签
+                return <h2>Hello World!,我是Junl,现在开始学习{this.props.name}</h2>;
+            }
+        }
+    );
+    //将自定义组件 render（渲染）到id='example'的元素上
+    ReactDOM.render(<HelloMessage name="React语法基础"/>, document.getElementById('example'));
+</script>
+</body>
+</html>
